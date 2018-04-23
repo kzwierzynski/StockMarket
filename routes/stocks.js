@@ -71,7 +71,7 @@ router.post('/buy', passport.authenticate('jwt', { session: false }), (req, res)
                 return res.json({success : false,  msg: "You don't have enough PLN for this transaction. Please try again"});
             }
             if (buy_shares > market_shares) {
-                return res.json({success : false,  msg: "We're sorry, currently we don't have enough " + code + " shares for this transaction.  Please try again later."});
+                return res.json({success : false,  msg: "We're sorry, currently we don't have enough " + code + " shares for this transaction.  Please try again later or try buying less units."});
             }
 
             let newMarketWallet = stock;               
@@ -132,11 +132,11 @@ router.post('/sell', passport.authenticate('jwt', { session: false }), (req, res
             let market_pln = stock.wallet.PLN;
             let market_shares = stock.wallet[code];            
             
-            if (sell_pln > user_pln) {
+            if (sell_units > user_units) {
                 return res.json({success : false,  msg: "You don't have enough " + code + " shares for this transaction. Please try again"});
             }
-            if (sell_shares > market_shares) {
-                return res.json({success : false,  msg: "We're sorry, currently we don't have enough PLN for this transaction. Please try again later."});
+            if (sell_pln > market_pln) {
+                return res.json({success : false,  msg: "We're sorry, currently we don't have enough PLN for this transaction. Please try again later or try selling less units."});
             }
 
             let newMarketWallet = stock;

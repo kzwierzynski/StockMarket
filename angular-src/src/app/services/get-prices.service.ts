@@ -12,6 +12,11 @@ export class GetPricesService{
   Codes = ["FP", "FPL", "FPC", "PGB", "FPA", "DL24"];
   Units = [1, 100, 1, 50, 50, 100];
   timer = 3000;
+  interval: any;
+  lastDate: Date;
+  dateTime: Date;
+  displayDate: String;
+  displayTime: String;
 
   constructor(
     private http: Http,
@@ -19,12 +24,22 @@ export class GetPricesService{
     private flashMessage: FlashMessagesService
   ) {
     this.updatePrices();
-    setInterval(() => { 
+    this.interval = setInterval(() => { 
       this.updatePrices(); 
     }, this.timer);
    }
 
 
+  handleTime(newDate){
+      if ( this.lastDate != newDate){ 
+
+        this.lastDate = newDate;
+        this.dateTime = new Date(newDate);
+        this.displayDate =  this.dateTime.toDateString();
+        this.displayTime =  this.dateTime.toTimeString();
+        console.log("new Prices: ", this.displayDate, this.displayTime); 
+      }      
+    }
     
 
   getPrices(){
@@ -80,7 +95,7 @@ export class GetPricesService{
           // console.log("3", data.srvBlocked); 
           this.srvBlocked = data.srvBlocked;
           this.storePrices(data.current);
-          console.log(data.msg, data.current.publicationDate);
+          this.handleTime(data.current.publicationDate);
         }
       },
     (err) =>{

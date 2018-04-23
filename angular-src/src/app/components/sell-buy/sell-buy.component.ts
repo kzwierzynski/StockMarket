@@ -3,6 +3,7 @@ import {AuthService} from '../../services/auth.service';
 import {GetPricesService} from '../../services/get-prices.service';
 import {SellBuyService} from '../../services/sell-buy.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sell-buy',
@@ -22,20 +23,32 @@ export class SellBuyComponent implements OnInit {
     private auth: AuthService,
     private prices: GetPricesService,
     private sellBuy: SellBuyService,
-    private flashMessage: FlashMessagesService
+    private flashMessage: FlashMessagesService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.sellBuy.restoreNumCode();
     this.auth.getUser();
     this.prices.restorePrices();
-    // console.log(this.prices.currPrices.items[this.sellBuy.i].price );
   }
 
   // onClickUpdate(){
   //   this.popoverMessage = `Are you sure you want to buy ${ this.buyUnits * this.prices.currUnits[this.sellBuy.i] } ${ this.prices.currCodes[this.sellBuy.i] } for ${ (this.prices.currPrices.items[this.sellBuy.i].sellPrice * this.buyUnits).toFixed(2)} PLN?`;
   // }
   
+  //if user in the meantime haven't hidden the popover in any way, after delay hide the popover
+  onClickDelay(){
+    let mouseClick = new MouseEvent('click');
+    setTimeout( ()=> {
+      let cancelBtn = document.getElementsByClassName("btn-default")[0];
+      //check if popover still opened
+      if (cancelBtn) {
+        cancelBtn.dispatchEvent(mouseClick);
+      }
+    }, 3000);
+  }
+
   onClickBuy(){
     this.sellBuy.data.units = this.buy_units;
     this.sellBuy.data.num_code = this.sellBuy.i;
@@ -44,23 +57,20 @@ export class SellBuyComponent implements OnInit {
     this.prices.buyUnits(this.sellBuy.data)
     .subscribe(response =>{
       if (!response.success) {  
-        // console.log("1");     
         this.flashMessage.show(response.msg, 
           { cssClass: 'alert-danger', timeout: 5000 });
       } else {
-        // console.log("2"); 
         this.auth.updateWallet(response.wallet);
         this.flashMessage.show(response.msg, 
           { cssClass: 'alert-success', timeout: 5000 });
-        // console.log("Users wallet updated: " + response.wallet);
+        this.router.navigate(['']);
       }
     },
-  (err) =>{
-    this.flashMessage.show("Sorry, something went wrong, please try again later.", 
-    { cssClass: 'alert-danger', timeout: 5000 });
-  });
-
-    // console.log(this.sellBuy.response, this.sellBuy.i, this.prices.currPrices.items[this.sellBuy.i].Price);
+    (err) =>{
+      this.flashMessage.show("Sorry, something went wrong, please try again later.", 
+      { cssClass: 'alert-danger', timeout: 5000 });
+    });
+  
   }
 
   onClickSell(){
@@ -70,22 +80,20 @@ export class SellBuyComponent implements OnInit {
 
     this.prices.sellUnits(this.sellBuy.data)
     .subscribe(response =>{
-      if (!response.success) {  
-        // console.log("1");     
+      if (!response.success) {
         this.flashMessage.show(response.msg, 
           { cssClass: 'alert-danger', timeout: 5000 });
       } else {
-        // console.log("2"); 
         this.auth.updateWallet(response.wallet);
         this.flashMessage.show(response.msg, 
           { cssClass: 'alert-success', timeout: 5000 });
-        // console.log("Users wallet updated: " + response.wallet);
+        this.router.navigate(['']);
       }
     },
-  (err) =>{
-    this.flashMessage.show("Sorry, something went wrong, please try again later.", 
-    { cssClass: 'alert-danger', timeout: 5000 });
-  });
+    (err) =>{
+      this.flashMessage.show("Sorry, something went wrong, please try again later.", 
+      { cssClass: 'alert-danger', timeout: 5000 });
+    });
   }
 
 }

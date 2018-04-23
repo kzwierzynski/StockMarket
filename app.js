@@ -41,6 +41,8 @@ resources.initWallet()
     .then((html) => {
         srvBlock = false;
         currData = JSON.parse(html);
+        // here decision if the same publicationDate or not -> update 
+
         return resources.updatePrices(currData);
     })
     .then( val => console.log(val) )

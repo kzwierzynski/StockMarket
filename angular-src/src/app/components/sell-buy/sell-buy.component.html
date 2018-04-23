@@ -23,7 +23,8 @@
             [popoverMessage]="popoverMessage"
             placement="bottom"
             (confirm)="onClickBuy()"
-            (cancel)="cancelClicked = true">
+            (cancel)="cancelClicked = true"
+            (click)="onClickDelay()">
             Buy Shares
           </button>
         </div>
@@ -59,7 +60,8 @@
               [popoverMessage]="popoverMessage"
               placement="bottom"
               (confirm)="onClickSell()"
-              (cancel)="cancelClicked = true">
+              (cancel)="cancelClicked = true"
+              (click)="onClickDelay()">
               Sell Shares
             </button>
           </div>
