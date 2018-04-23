@@ -1,0 +1,53 @@
+<br>
+<div class="card mb-3 center-block" style="width: 80%; margin: 0 auto;">
+  <div class="card-header"><h4>Register </h4></div>
+  <div class="card-body">
+    <form (submit)="onRegisterSubmit()">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" [(ngModel)]="name" name="name" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" [(ngModel)]="username" name="username" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="text" [(ngModel)]="email" name="email" class="form-control" >
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" [(ngModel)]="password" name="password" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Amount of unit shares of FP</label>
+        <input type="number" [(ngModel)]="FP" name="FP" class="form-control" min="0" max="1000" step="1">
+      </div>
+      <div class="form-group">
+        <label>Amount of unit shares of FPL</label>
+        <input type="number" [(ngModel)]="FPL" name="FPL" class="form-control" min="0" max="1000" step="1">
+      </div>
+      <div class="form-group">
+        <label>Amount of unit shares of FPC</label>
+        <input type="number" [(ngModel)]="FPC" name="FPC" class="form-control"min="0" max="1000" step="1">
+      </div>
+      <div class="form-group">
+        <label>Amount of unit shares of PGB</label>
+        <input type="number" [(ngModel)]="PGB" name="PGB" class="form-control" min="0" max="1000" step="1">
+      </div>
+      <div class="form-group">
+        <label>Amount of unit shares of FPA</label>
+        <input type="number" [(ngModel)]="FPA" name="FPA" class="form-control" min="0" max="1000" step="1">
+      </div>
+      <div class="form-group">
+        <label>Amount of unit shares of DL24</label>
+        <input type="number" [(ngModel)]="DL24" name="DL24" class="form-control" min="0" max="1000" step="1">
+      </div>
+      <div class="form-group">
+        <label>Amount of PLN</label>
+        <input type="number" [(ngModel)]="PLN" name="PLN" class="form-control" min="0" max="100000" step="1">
+      </div>
+      <input type="submit" class="btn btn-info btn-lg" value="Submit">
+    </form>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<br>
+<div class="card mb-3 center-block" style="width: 80%; margin: 0 auto;" *ngIf="auth.loggedIn()">
+  <div class="card-header"><h4>Your Profile</h4></div>
+  <div class="card-body">
+    <ul class="list-group">
+      <li class="list-group-item">Username: {{auth.user.username}} </li>
+      <li class="list-group-item">Name: {{auth.user.name}} </li>
+      <li class="list-group-item">Email: {{auth.user.email}} </li>
+    </ul>
+  </div>
+</div>
