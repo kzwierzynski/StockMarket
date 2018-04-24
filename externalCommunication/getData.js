@@ -1,4 +1,4 @@
-const Stock = require('./models/stock');
+const Stock = require('../models/stock');
 
 // get current stock prices from external server
 exports.getContent = function(url) {

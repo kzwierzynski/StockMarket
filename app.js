@@ -11,7 +11,7 @@ const users = require('./routes/users');
 const stocks = require('./routes/stocks');
 
 const url = 'http://webtask.future-processing.com:8068/stocks';
-const getData = require('./getData');
+const getData = require('./externalCommunication/getData');
 let currData, srvBlock = false;
 
 
