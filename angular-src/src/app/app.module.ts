@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {RouterModule, Routes} from '@angular/router'
 import {FlashMessagesModule} from 'angular2-flash-messages';
@@ -23,6 +23,7 @@ import { BuyComponent } from './components/buy/buy.component';
 import { SellComponent } from './components/sell/sell.component';
 import { LogdivComponent } from './components/logdiv/logdiv.component';
 import { SellBuyComponent } from './components/sell-buy/sell-buy.component';
+import { MaxCtrlDirective } from './max-ctrl.directive';
 
 
 const appRoutes : Routes = [
@@ -44,7 +45,8 @@ const appRoutes : Routes = [
     BuyComponent,
     SellComponent,
     LogdivComponent,
-    SellBuyComponent
+    SellBuyComponent,
+    MaxCtrlDirective
   ],
   imports: [
     BrowserModule,

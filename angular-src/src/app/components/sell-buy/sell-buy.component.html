@@ -12,7 +12,7 @@
         </div>
         <div class="col">
           <input type="number" class="form-control" [(ngModel)]="buy_units" name="buy_units"
-          [max]="auth.user.wallet.PLN / prices.currPrices.items[sellBuy.i].price" pattern="^\+?([1-9]\d*)$" 
+          pattern="^\+?([1-9]\d*)$" maxValidator="{{auth.user.wallet.PLN / prices.currPrices.items[sellBuy.i].price}}"
           #fbuy="ngModel" required>
 
           <div *ngIf="fbuy.invalid && (fbuy.dirty || fbuy.touched)"
@@ -20,11 +20,11 @@
             <div *ngIf="fbuy.errors.required">
               You need to specify number of units you want to buy.
             </div>
-            <div *ngIf="fbuy.errors.max">
-              You don't have enough money to buy this many units of this company.
-            </div>
             <div *ngIf="fbuy.errors.pattern">
               This in is not a positive integer.
+            </div>
+            <div *ngIf="fbuy.errors.maxExceeded">
+                You don't have enough money for this transaction.
             </div>
           </div>
         </div>
@@ -64,7 +64,7 @@
           </div>
           <div class="col">
             <input type="number" class="form-control" [(ngModel)]="sell_units" name="sell_units"
-            max="{{Number(auth.user.wallet[prices.Codes[sellBuy.i]])}}" pattern="^\+?([1-9]\d*)$"
+            maxValidator="{{auth.user.wallet[prices.Codes[sellBuy.i]]}}" pattern="^\+?([1-9]\d*)$"
             #fsell="ngModel" required>
 
             <div *ngIf="fsell.invalid && (fsell.dirty || fsell.touched)"
@@ -72,7 +72,7 @@
               <div *ngIf="fsell.errors.required">
                 You need to specify number of units you want to sell.
               </div>
-              <div *ngIf="fsell.errors.max">
+              <div *ngIf="fsell.errors.maxExceeded">
                 You don't have enough units for this transaction.
               </div>
               <div *ngIf="fsell.errors.pattern">
