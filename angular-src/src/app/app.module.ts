@@ -24,6 +24,7 @@ import { SellComponent } from './components/sell/sell.component';
 import { LogdivComponent } from './components/logdiv/logdiv.component';
 import { SellBuyComponent } from './components/sell-buy/sell-buy.component';
 import { MaxCtrlDirective } from './max-ctrl.directive';
+import { SrvBlockedComponent } from './components/srv-blocked/srv-blocked.component';
 
 
 const appRoutes : Routes = [
@@ -46,7 +47,8 @@ const appRoutes : Routes = [
     SellComponent,
     LogdivComponent,
     SellBuyComponent,
-    MaxCtrlDirective
+    MaxCtrlDirective,
+    SrvBlockedComponent
   ],
   imports: [
     BrowserModule,

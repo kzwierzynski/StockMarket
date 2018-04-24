@@ -92,11 +92,7 @@ export class GetPricesService{
           this.flashMessage.show(data.msg, 
             { cssClass: 'alert-danger', timeout: 5000 });
 
-        } else if (data.srvBlocked) {
-          this.flashMessage.show("Our servers are currently under maintenace. Temporarily all transactions are suspended. Sorry for the inconvenience.", 
-            { cssClass: 'alert-danger', timeout: this.timer });
-
-        } else {
+        }  else {
           if ( this.handleTime(data.current.publicationDate) )
           {
             this.storePrices(data.current);
@@ -104,8 +100,9 @@ export class GetPricesService{
         }
       },
     (err) =>{
-      this.flashMessage.show("Our servers are currently under maintenace. Temporarily all transactions are suspended. Sorry for the inconvenience.", 
-      { cssClass: 'alert-danger', timeout: this.timer });
+      // this.flashMessage.show("Our servers are currently under maintenace. Temporarily all transactions are suspended. Sorry for the inconvenience.", 
+      // { cssClass: 'alert-danger', timeout: this.timer });
+      console.log(err);
       this.srvBlocked = true;
     });
   }
