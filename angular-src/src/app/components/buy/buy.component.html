@@ -1,4 +1,4 @@
-<div class="card mb-3" *ngIf="prices.currPrices">
+<div class="card mb-3">
     <div class="card-header"><h4>Stock prices</h4></div>
     <div class="card-body p-0">
         <table class="table table-hover text-center mb-4">
@@ -9,11 +9,11 @@
               <th scope="col">Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody *ngIf="prices.currPrices">
             <tr *ngFor="let unit of prices.Units; let i = index">
               <th scope="row">{{ prices.Codes[i] }}</th>
               <td>{{ prices.currPrices.items[i].price }}</td>
-              <td><button class="btn btn-info" (click)="buyCurrency(i)" id="i" *ngIf="!prices.srvBlocked">Buy</button></td>
+              <td><button class="btn btn-info" (click)="buyCurrency(i)" id="i" [disabled]="!auth.user.wallet.PLN || prices.srvBlocked">Buy</button></td>
             </tr>
           </tbody>
         </table> 

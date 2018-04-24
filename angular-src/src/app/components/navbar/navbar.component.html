@@ -19,7 +19,7 @@
                 <a class="nav-link" [routerLink]="['/login']">Login</a>
             </li>
             <li *ngIf="auth.loggedIn()" class="nav-item">
-                <p class="nav-link mb-0">Logged in as: {{username}}</p> 
+                <p class="nav-link mb-0">Logged in as: {{auth.user.username}}</p> 
             </li>
             <li *ngIf="auth.loggedIn()" class="nav-item" [routerLinkActive]="['active']">
                 <a class="nav-link" [routerLink]="['/profile']"><i class="fas fa-cog fa-2x"></i></a>

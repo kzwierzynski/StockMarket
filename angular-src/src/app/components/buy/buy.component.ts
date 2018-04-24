@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {GetPricesService} from '../../services/get-prices.service';
 import {SellBuyService} from '../../services/sell-buy.service';
 import { Router } from '@angular/router';
+import {AuthService} from '../../services/auth.service';
+
 
 
 @Component({
@@ -14,11 +16,13 @@ export class BuyComponent implements OnInit {
   constructor(
     private prices: GetPricesService,
     private sellBuy: SellBuyService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
     this.prices.restorePrices();
+    this.auth.getUser();
   }
 
   buyCurrency(i : number){

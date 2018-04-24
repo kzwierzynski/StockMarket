@@ -19,17 +19,16 @@ username: any;
   ) { }
 
   ngOnInit() {
-    if (this.auth.loggedIn()){  //to avoid error, before logging in
+    if (!this.auth.user && this.auth.loggedIn()){  //to avoid error, before logging in
       this.auth.getUser();
-      this.username = this.auth.user.username;
     }
   }
 
   onClickLogout(){
-    this.auth.logout();
-    this.flashMessage.show("You've been logged out. See you soon!", 
+    this.flashMessage.show(`You've been logged out. See you soon, ${this.auth.user.name}!`, 
             { cssClass: 'alert-success', timeout: 3000 });
     this.router.navigate(['/login']);
+    this.auth.logout();
     return false;
   }
 }

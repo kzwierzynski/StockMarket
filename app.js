@@ -64,7 +64,7 @@ let intervalID = setInterval(()=> {
         srvBlock = true;
         console.error(err);
     });
-}, 30000);
+}, 3000);
     
 
 

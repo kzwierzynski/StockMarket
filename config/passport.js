@@ -10,14 +10,22 @@ module.exports = function (passport){
     opts.secretOrKey = config.secret;
     passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
         // console.log(jwt_payload);
-        User.getUserById(jwt_payload.data._id, (err, user) => {
+        User.getUserById(jwt_payload.data.id, (err, user) => {
             if (err) {
-                return done(err, false);
+                return done(err, null);
             }
             if (user) {
-                return done(null, user);
+                //limit user data in jwt, anyone can decrypt jwt, no sensitive data
+                let user_jwt = {
+                    id: user._id,   
+                    name: user.name,
+                    username: user.username,
+                    email: user.email,
+                    wallet: user.wallet
+                };
+                return done(null, user_jwt);
             } else {
-                return done(null, false);
+                return done(null, null);
                 // or you could create a new account
             }
         });

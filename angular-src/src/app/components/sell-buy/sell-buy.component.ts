@@ -67,6 +67,7 @@ export class SellBuyComponent implements OnInit {
       }
     },
     (err) =>{
+      console.log(err);
       this.flashMessage.show("Sorry, something went wrong, please try again later.", 
       { cssClass: 'alert-danger', timeout: 5000 });
     });
@@ -91,6 +92,7 @@ export class SellBuyComponent implements OnInit {
       }
     },
     (err) =>{
+      console.log(err);
       this.flashMessage.show("Sorry, something went wrong, please try again later.", 
       { cssClass: 'alert-danger', timeout: 5000 });
     });

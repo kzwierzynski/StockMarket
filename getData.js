@@ -5,14 +5,19 @@ exports.getContent = function(url) {
     let stock = {};
     // return new pending promise
     return new Promise((resolve, reject) => {
-        // select http or https module, depending on reqested url
+        // select http or https module, depending on reqested
+
         const lib = url.startsWith('https') ? require('https') : require('http');
         const request = lib.get(url, (response) => {
             // handle http errors
-            if (response.statusCode < 200 || response.statusCode > 299) {
+            // resp.code != 200
+            if (response.statusCode != 200) {
                 stock.srvBlocked = true;
                 Stock.updateStock(stock, error => {
-                    if (error) throw error;
+                    if (error) {
+                        reject(error);
+                    }
+                    //logowanie
                     reject(new Error('Failed to connect to external server, status code: ' + response.statusCode));
                 });
             }
@@ -24,8 +29,20 @@ exports.getContent = function(url) {
             response.on('end', () => {
                 stock.srvBlocked = false;
                 Stock.updateStock(stock, error => {
-                    if (error) throw error;
+                    if (error) {
+                        reject(error);
+                    }
+                    //error handling
                     resolve(body.join(''));
+                });
+            });
+            response.on('error', (err) => {
+                stock.srvBlocked = true;
+                Stock.updateStock(stock, error => {
+                    if (error) {
+                        return reject(error);
+                    }
+                    return reject(err);
                 });
             });
         });
@@ -33,28 +50,28 @@ exports.getContent = function(url) {
         request.on('error', (err) => {
             stock.srvBlocked = true;
             Stock.updateStock(stock, error => {
-                if (error) throw error;
-                reject(err);
+                if (error) {
+                    return reject(error);
+                }
+                return reject(err);
             });
-        })
+        });
     });
 }
 
-  
+
 // let intervalID = 0;
 
-// let wait = 
+// let wait =
 //     ms => new Promise(
 //         r => setTimeout(r, ms)
 //     );
 
 // //repeat func (returning a promise every "ms" miliseconds)
-// exports.repeat = 
+// exports.repeat =
 //     (ms, func) => new Promise(
 //         res => (
 //             intervalID = setInterval(func, ms),
 //             wait(ms).then(res)
 //         )
 //     );
-
-

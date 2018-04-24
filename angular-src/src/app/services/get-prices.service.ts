@@ -29,16 +29,18 @@ export class GetPricesService{
     }, this.timer);
    }
 
-
+   //checks if there are new
   handleTime(newDate){
       if ( this.lastDate != newDate){ 
-
         this.lastDate = newDate;
         this.dateTime = new Date(newDate);
         this.displayDate =  this.dateTime.toDateString();
         this.displayTime =  this.dateTime.toTimeString();
         console.log("new Prices: ", this.displayDate, this.displayTime); 
-      }      
+        return true;
+      } else {
+        return false;
+      }
     }
     
 
@@ -54,7 +56,8 @@ export class GetPricesService{
     headers.append('Content-Type','application/json');
     this.auth.getToken();
     headers.append('Authorization', this.auth.authToken);
-
+    
+    console.log(this.auth.authToken);
     return this.http.post('http://localhost:3000/stocks/buy', data, {headers: headers})
       .map(res => res.json());
   }
@@ -65,6 +68,7 @@ export class GetPricesService{
     this.auth.getToken();
     headers.append('Authorization', this.auth.authToken);
 
+    console.log(this.auth.authToken);
     return this.http.post('http://localhost:3000/stocks/sell', data, {headers: headers})
       .map(res => res.json());
   }
@@ -75,27 +79,28 @@ export class GetPricesService{
   }
 
   restorePrices(){
-    this.currPrices = JSON.parse(localStorage.getItem('prices'));
+    if (!this.currPrices){  //if quick (logout -> login)-> empty local storage 
+      this.currPrices = JSON.parse(localStorage.getItem('prices'));
+    }
   }
 
   updatePrices(){
     this.getPrices()
       .subscribe(data =>{
+        this.srvBlocked = data.srvBlocked;        
         if (!data.success) {  
-          // console.log("1", data.srvBlocked);     
-          this.srvBlocked = data.srvBlocked;
           this.flashMessage.show(data.msg, 
             { cssClass: 'alert-danger', timeout: 5000 });
+
         } else if (data.srvBlocked) {
-          // console.log("2", data.srvBlocked); 
-          this.srvBlocked = data.srvBlocked;
           this.flashMessage.show("Our servers are currently under maintenace. Temporarily all transactions are suspended. Sorry for the inconvenience.", 
             { cssClass: 'alert-danger', timeout: this.timer });
+
         } else {
-          // console.log("3", data.srvBlocked); 
-          this.srvBlocked = data.srvBlocked;
-          this.storePrices(data.current);
-          this.handleTime(data.current.publicationDate);
+          if ( this.handleTime(data.current.publicationDate) )
+          {
+            this.storePrices(data.current);
+          }
         }
       },
     (err) =>{

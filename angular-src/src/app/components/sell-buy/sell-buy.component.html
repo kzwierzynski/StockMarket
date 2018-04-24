@@ -18,7 +18,7 @@
             <label class="col-form-label"> for {{ (prices.currPrices.items[sellBuy.i].price * buy_units).toFixed(2) }} PLN</label> 
         </div>
         <div class="col">
-            <button class="btn btn-primary btn-lg" mwlConfirmationPopover *ngIf="!prices.srvBlocked"
+            <button class="btn btn-primary btn-lg" mwlConfirmationPopover [disabled]="prices.srvBlocked"
             [popoverTitle]="popoverTitle"
             [popoverMessage]="popoverMessage"
             placement="bottom"
@@ -55,7 +55,7 @@
               <label class="col-form-label">for {{ (prices.currPrices.items[this.sellBuy.i].price * buyUnits).toFixed(2) }} PLN</label> 
           </div> -->
           <div class="col">
-              <button class="btn btn-primary btn-lg" mwlConfirmationPopover *ngIf="!prices.srvBlocked"
+              <button class="btn btn-primary btn-lg" mwlConfirmationPopover [disabled]="prices.srvBlocked"
               [popoverTitle]="popoverTitle"
               [popoverMessage]="popoverMessage"
               placement="bottom"

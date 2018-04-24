@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
         } else {
           this.auth.storeData(data.token, data.user);
-          console.log(this.auth.user);
+          // console.log(this.auth.user);
           // this.auth.getUser();
 
           this.flashMessage.show("You are now logged in as " + data.user.username, 
@@ -46,6 +46,11 @@ export class LoginComponent implements OnInit {
 
           this.router.navigate(['']);
         }
+      },
+      (err) =>{
+        console.log(err);
+        this.flashMessage.show("Sorry, something went wrong, please try again later.", 
+        { cssClass: 'alert-danger', timeout: 5000 });
       });
 
   }

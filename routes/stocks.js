@@ -18,7 +18,9 @@ function isPosInt(str) {
 //Get current prices
 router.get('/current', (req, res) => {
     Stock.getStock( (err, stock) => {
-        if (err) throw err;
+        if (err) {
+            res.json({success : false,  msg: err})
+        }
         if (!stock) {
             res.json({success : false,  
                 msg: "Failed to get current stock prices from DB",
@@ -47,16 +49,20 @@ router.post('/buy', passport.authenticate('jwt', { session: false }), (req, res)
     }
     let buy_shares = buy_units * Units[num_code]; 
 
-    User.getUserById(user_id, (err, user) => {
-        if (err) throw err;
+    User.getUserById(user_id, (err1, user) => {
+        if (err1) {
+            res.json({success : false,  msg: err1})
+        }
         if (!user){
             return res.json({'success': false, msg: 'User not found in DB'});
         }
         let user_pln = user.wallet.PLN;
         let user_units = user.wallet[code];
 
-        Stock.getStock( (err, stock) => {
-            if (err) throw err;
+        Stock.getStock( (err2, stock) => {
+            if (err2) {
+                res.json({success : false,  msg: err2})
+            }
             if (!stock) {
                 return res.json({success : false,  msg: "Failed to get necessary data from DB"});
             }
@@ -83,11 +89,15 @@ router.post('/buy', passport.authenticate('jwt', { session: false }), (req, res)
             newUserWallet.wallet.PLN = +(user_pln - buy_pln).toFixed(2);
             newUserWallet.wallet[code] = user_units + buy_units;
 
-            Stock.updateStock(newMarketWallet, err => {
-                if (err) throw err;
+            Stock.updateStock(newMarketWallet, err3 => {
+                if (err3) {
+                    res.json({success : false,  msg: err3})
+                }
 
-                User.updateUser(user_id, newUserWallet, (err, updatedUser) => {
-                    if (err) throw err;
+                User.updateUser(user_id, newUserWallet, (err4, updatedUser) => {
+                    if (err4) {
+                        res.json({success : false,  msg: err4})
+                    }
                     return res.json({
                         success : true,  
                         msg: "Transaction completed- you've bought " + buy_units + " unit(s) of " + code + " shares for " + buy_pln.toFixed(2) + " PLN",
@@ -112,16 +122,20 @@ router.post('/sell', passport.authenticate('jwt', { session: false }), (req, res
     }
     let sell_shares = sell_units * Units[num_code]; 
 
-    User.getUserById(user_id, (err, user) => {
-        if (err) throw err;
+    User.getUserById(user_id, (err1, user) => {
+        if (err1) {
+            res.json({success : false,  msg: err1})
+        }
         if (!user){
             return res.json({'success': false, msg: 'User not found in DB'});
         }
         let user_pln = user.wallet.PLN;
         let user_units = user.wallet[code];
 
-        Stock.getStock( (err, stock) => {
-            if (err) throw err;
+        Stock.getStock( (err2, stock) => {
+            if (err2) {
+                res.json({success : false,  msg: err2})
+            }
             if (!stock) {
                 return res.json({success : false,  msg: "Failed to get necessary data from DB"});
             }
@@ -148,11 +162,15 @@ router.post('/sell', passport.authenticate('jwt', { session: false }), (req, res
             //Avoid Floating point pproximation error + change to number again
             newUserWallet.wallet.PLN = +(user_pln + sell_pln).toFixed(2);
 
-                Stock.updateStock(newMarketWallet, err => {
-                    if (err) throw err;
+                Stock.updateStock(newMarketWallet, err3 => {
+                    if (err3) {
+                        res.json({success : false,  msg: err3})
+                    }
 
-                    User.updateUser(user_id, newUserWallet, (err, updatedUser) => {
-                        if (err) throw err;
+                    User.updateUser(user_id, newUserWallet, (err4, updatedUser) => {
+                        if (err4) {
+                            res.json({success : false,  msg: err4})
+                        }
                         return res.json({
                             success : true,  
                             msg: "Transaction completed- you've sold " + sell_units + " unit(s) of " + code + " shares for " + sell_pln.toFixed(2) + " PLN",
