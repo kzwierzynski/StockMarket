@@ -47,7 +47,7 @@ export class GetPricesService{
   getPrices(){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:3000/stocks/current', {headers: headers})
+    return this.http.get('stocks/current', {headers: headers})
       .map(res => res.json());
   }
 
@@ -58,7 +58,7 @@ export class GetPricesService{
     headers.append('Authorization', this.auth.authToken);
     
     console.log(this.auth.authToken);
-    return this.http.post('http://localhost:3000/stocks/buy', data, {headers: headers})
+    return this.http.post('stocks/buy', data, {headers: headers})
       .map(res => res.json());
   }
 
@@ -69,7 +69,7 @@ export class GetPricesService{
     headers.append('Authorization', this.auth.authToken);
 
     console.log(this.auth.authToken);
-    return this.http.post('http://localhost:3000/stocks/sell', data, {headers: headers})
+    return this.http.post('stocks/sell', data, {headers: headers})
       .map(res => res.json());
   }
 
