@@ -2,13 +2,31 @@
 <div class="card mb-3 center-block" style="width: 80%; margin: 0 auto;" *ngIf="sellBuy.buy">
   <div class="card-header"><h4>Buy shares of {{prices.Codes[sellBuy.i]}} </h4></div>
   <div class="card-body">
-    <form>
+    <form (ngSubmit)="onSubmitDelay()" #buyForm="ngForm">
+      <div>
+        <p class="mb-4">You currently have {{auth.user.wallet.PLN}} PLN</p>
+      </div>
       <div class="mb-2 form-row">
         <div class="col text-right">
             <label for="buy" class="col-form-label">Buy: </label>
         </div>
         <div class="col">
-            <input type="number" class="form-control" [(ngModel)]="buy_units" name="buy_units" min="0" step="1">
+          <input type="number" class="form-control" [(ngModel)]="buy_units" name="buy_units"
+          [max]="auth.user.wallet.PLN / prices.currPrices.items[sellBuy.i].price" pattern="^\+?([1-9]\d*)$" 
+          #fbuy="ngModel" required>
+
+          <div *ngIf="fbuy.invalid && (fbuy.dirty || fbuy.touched)"
+            class="alert alert-danger ngValid">
+            <div *ngIf="fbuy.errors.required">
+              You need to specify number of units you want to buy.
+            </div>
+            <div *ngIf="fbuy.errors.max">
+              You don't have enough money to buy this many units of this company.
+            </div>
+            <div *ngIf="fbuy.errors.pattern">
+              This in is not a positive integer.
+            </div>
+          </div>
         </div>
         
         <div class="col">
@@ -18,13 +36,13 @@
             <label class="col-form-label"> for {{ (prices.currPrices.items[sellBuy.i].price * buy_units).toFixed(2) }} PLN</label> 
         </div>
         <div class="col">
-            <button class="btn btn-primary btn-lg" mwlConfirmationPopover [disabled]="prices.srvBlocked"
+            <button type="submit" class="btn btn-primary btn-lg" mwlConfirmationPopover
+            [disabled]="prices.srvBlocked || !buyForm.form.valid"
             [popoverTitle]="popoverTitle"
             [popoverMessage]="popoverMessage"
             placement="bottom"
             (confirm)="onClickBuy()"
-            (cancel)="cancelClicked = true"
-            (click)="onClickDelay()">
+            (cancel)="cancelClicked = true">
             Buy Shares
           </button>
         </div>
@@ -36,15 +54,34 @@
 <div class="card mb-3 center-block" style="width: 80%; margin: 0 auto;" *ngIf="!sellBuy.buy">
     <div class="card-header"><h4>Sell shares of {{prices.Codes[sellBuy.i]}} </h4></div>
     <div class="card-body">
-      <form>
+      <form (ngSubmit)="onSubmitDelay()" #sellForm="ngForm">
+        <div>
+          <p>You currently have {{auth.user.wallet[prices.Codes[sellBuy.i]]}} unit(s) of {{prices.Codes[sellBuy.i]}}</p>
+        </div>
         <div class="mb-2 form-row">
           <div class="col text-right">
               <label for="sell" class="col-form-label">Sell: </label>
           </div>
           <div class="col">
-              <input type="number" class="form-control" [(ngModel)]="sell_units" name="sell_units" min="1" step="1">
+            <input type="number" class="form-control" [(ngModel)]="sell_units" name="sell_units"
+            max="{{Number(auth.user.wallet[prices.Codes[sellBuy.i]])}}" pattern="^\+?([1-9]\d*)$"
+            #fsell="ngModel" required>
+
+            <div *ngIf="fsell.invalid && (fsell.dirty || fsell.touched)"
+              class="alert alert-danger ngValid">
+              <div *ngIf="fsell.errors.required">
+                You need to specify number of units you want to sell.
+              </div>
+              <div *ngIf="fsell.errors.max">
+                You don't have enough units for this transaction.
+              </div>
+              <div *ngIf="fsell.errors.pattern">
+                This in is not a positive integer.
+              </div>
+            </div>
           </div>
-          
+
+                    
           <div class="col">
               <label class="col-form-label">{{prices.Codes[sellBuy.i]}} unit(s)</label> 
           </div>
@@ -55,13 +92,13 @@
               <label class="col-form-label">for {{ (prices.currPrices.items[this.sellBuy.i].price * buyUnits).toFixed(2) }} PLN</label> 
           </div> -->
           <div class="col">
-              <button class="btn btn-primary btn-lg" mwlConfirmationPopover [disabled]="prices.srvBlocked"
+              <button class="btn btn-primary btn-lg" mwlConfirmationPopover 
+              [disabled]="prices.srvBlocked || !sellForm.form.valid"
               [popoverTitle]="popoverTitle"
               [popoverMessage]="popoverMessage"
               placement="bottom"
               (confirm)="onClickSell()"
-              (cancel)="cancelClicked = true"
-              (click)="onClickDelay()">
+              (cancel)="cancelClicked = true">
               Sell Shares
             </button>
           </div>

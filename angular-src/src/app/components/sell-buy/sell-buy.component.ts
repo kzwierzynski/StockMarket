@@ -14,6 +14,7 @@ export class SellBuyComponent implements OnInit {
 
   buy_units = 1;
   sell_units = 1;
+  delay = 10000;
   public popoverTitle: string = 'Confirmation';
   public popoverMessage: string  = "Are you sure you want to make the transaction?"
   // public popoverMessage: string;
@@ -38,7 +39,7 @@ export class SellBuyComponent implements OnInit {
   // }
   
   //if user in the meantime haven't hidden the popover in any way, after delay hide the popover
-  onClickDelay(){
+  onSubmitDelay(){
     let mouseClick = new MouseEvent('click');
     setTimeout( ()=> {
       let cancelBtn = document.getElementsByClassName("btn-default")[0];
@@ -46,7 +47,7 @@ export class SellBuyComponent implements OnInit {
       if (cancelBtn) {
         cancelBtn.dispatchEvent(mouseClick);
       }
-    }, 3000);
+    }, this.delay);
   }
 
   onClickBuy(){
