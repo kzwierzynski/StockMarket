@@ -1,7 +1,15 @@
-# Stocks Project
+# Stocks Project - Backend part:
 Project is divided into 2 main parts:
-    Front-end: in directory `./angular-src` of this project. This part of the project was developed useing Angular, angular CLI and dependencies. Inside of the mentioned directory you can find more detailed info about front-end part of the project in `ReadMe.md` file, and dependencies that are used in `package.json` file.
-    Backend: in the main directory. The main program is located in `app.js`. 
+    Front-end: located in `./Front-end` directory. That part of the project was developed using Angular, angular CLI and necessary dependencies. Inside of the mentioned directory you can find more detailed info about front-end part of the project in `ReadMe.md` file, and dependencies that are used- in `package.json` file.
+
+    Backend: located in this directory. This part of the project  was developed using node.js, Express.js, MongoDB and necessary dependencies. The main program is in `app.js`, modules used by this app are located in the following folders:
+        ./config - config files for communication with mongoDB, passport authentication and resources of the Stock market.
+        ./externalCommunication - module with responsible for communication with external server and updating current prices accordingly
+        ./models - files with mongoose Schema for DB collections used in this project- User and Stock, along with functions interacting with MongoDB.
+        ./public - build files from front-end
+        ./routes - files for handling requests from client side (Front-end).
+
+Dependencies used for this part of the project are to be found in `package.json` file.
 
 ## Development server
 

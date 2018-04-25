@@ -1,4 +1,13 @@
-# AngularSrc (Front-end part of the project)
+# Stocks Project - Front-end part:
+Project is divided into 2 main parts:
+
+    Backend: located in parent directory. That part of the project  was developed using node.js, Express.js, MongoDB and necessary dependencies. In parent directory you can find more detailed info about front-end part of the project in `ReadMe.md` file, and dependencies that are used- in `package.json` file.
+        
+    Front-end: located in this directory. This part of the project was developed using Angular, angular CLI and necessary dependencies. in `./src/` directory are stored cource files for Front-end application. There you can find  `main.ts` and `index.html` that use modules, components, services and directives which can be found in `./src/app/` directory. In `.src/asstes/`directory and in `./src/styles.css` is custom styling. Front-end application uses Bootstrap 4 along with some of its dependencies.
+
+Dependencies used for this part of the project are to be found in `package.json` file inside of this directory.
+
+# Angular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.1.
 
