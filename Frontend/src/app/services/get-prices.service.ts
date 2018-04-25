@@ -15,8 +15,7 @@ export class GetPricesService{
   interval: any;
   lastDate: Date;
   dateTime: Date;
-  displayDate: String;
-  displayTime: String;
+  displayLocal: String;
 
   constructor(
     private http: Http,
@@ -34,9 +33,8 @@ export class GetPricesService{
       if ( this.lastDate != newDate){ 
         this.lastDate = newDate;
         this.dateTime = new Date(newDate);
-        this.displayDate =  this.dateTime.toDateString();
-        this.displayTime =  this.dateTime.toTimeString();
-        console.log("new Prices: ", this.displayDate, this.displayTime); 
+        this.displayLocal =  this.dateTime.toLocaleString();
+        console.log("new Prices: ", this.displayLocal); 
         return true;
       } else {
         return false;
