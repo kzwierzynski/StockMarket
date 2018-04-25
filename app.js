@@ -41,17 +41,19 @@ resources.initWallet()
     .then((html) => {
         srvBlock = false;
         currData = JSON.parse(html);
-        // here decision if the same publicationDate or not -> update 
-
         return resources.updatePrices(currData);
     })
-    .then( val => console.log(val) )
+    .then( val => {
+        if (val.new) {
+            console.log(val.msg)
+        }
+    })
     .catch((err) => {
         srvBlock = true;
         console.error(err);
     });
 
-// setinterval to get new data from URL every 30s
+// setinterval to get new data from URL every 3s
 let intervalID = setInterval(()=> {
     getData.getContent(url)
     .then((html) => {
@@ -59,7 +61,11 @@ let intervalID = setInterval(()=> {
         currData = JSON.parse(html);
         return resources.updatePrices(currData);
     })
-    .then( val => console.log(val) )
+    .then( val => {
+        if (val.new) {
+            console.log(val.msg)
+        }
+    })
     .catch((err) => {
         srvBlock = true;
         console.error(err);
@@ -101,5 +107,5 @@ app.get('*',function (req, res) {   //redirect if some different url from all sp
 
 // Start server
 app.listen(port, () => {
-    console.log("Server started on port 8080...")
+    console.log(`Server started on port ${port}...`)
 })

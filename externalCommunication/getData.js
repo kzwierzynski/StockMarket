@@ -5,12 +5,10 @@ exports.getContent = function(url) {
     let stock = {};
     // return new pending promise
     return new Promise((resolve, reject) => {
-        // select http or https module, depending on reqested
-
+        // select http or https module, depending on reqested, in this app not needed because of url is constant. For future.
         const lib = url.startsWith('https') ? require('https') : require('http');
         const request = lib.get(url, (response) => {
             // handle http errors
-            // resp.code != 200
             if (response.statusCode != 200) {
                 stock.srvBlocked = true;
                 Stock.updateStock(stock, error => {

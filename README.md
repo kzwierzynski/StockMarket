@@ -13,7 +13,7 @@ Dependencies used for this part of the project are to be found in `package.json`
 
 ## Development server
 
-Run `nodemon` for a dev server available under `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
+Run `nodemon` for a dev server, which in this setup is available under `http://localhost:8080/`. For local use you can change value of variable 'port' to 3000 in app.js, so the serves is available under `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
 You may need to install nodemon globally using `npm install -g nodemon` in your command prompt.
 
 ## To ensure full compatibility, use the following technology stack:

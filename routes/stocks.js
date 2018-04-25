@@ -19,7 +19,7 @@ function isPosInt(str) {
 router.get('/current', (req, res) => {
     Stock.getStock( (err, stock) => {
         if (err) {
-            res.json({success : false,  msg: err})
+            return res.json({success : false,  msg: err})
         }
         if (!stock) {
             res.json({success : false,  

@@ -28,18 +28,20 @@ export class GetPricesService{
     }, this.timer);
    }
 
-   //checks if there are new
+   //checks if receive prices are new
   handleTime(newDate){
-      if ( this.lastDate != newDate){ 
-        this.lastDate = newDate;
-        this.dateTime = new Date(newDate);
-        this.displayLocal =  this.dateTime.toLocaleString();
-        console.log("new Prices: ", this.displayLocal); 
-        return true;
-      } else {
-        return false;
-      }
+    if ( this.lastDate != newDate){ 
+    //new prices      
+      this.lastDate = newDate;
+      this.dateTime = new Date(newDate);
+      this.displayLocal =  this.dateTime.toLocaleString();
+      return true;
+
+    } else {
+      //current prices are up to date
+      return false;
     }
+  }
     
 
   getPrices(){

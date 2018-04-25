@@ -1155,16 +1155,17 @@ var GetPricesService = /** @class */ (function () {
             _this.updatePrices();
         }, this.timer);
     }
-    //checks if there are new
+    //checks if receive prices are new
     GetPricesService.prototype.handleTime = function (newDate) {
         if (this.lastDate != newDate) {
+            //new prices      
             this.lastDate = newDate;
             this.dateTime = new Date(newDate);
             this.displayLocal = this.dateTime.toLocaleString();
-            console.log("new Prices: ", this.displayLocal);
             return true;
         }
         else {
+            //current prices are up to date
             return false;
         }
     };
