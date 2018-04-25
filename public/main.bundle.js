@@ -1062,7 +1062,7 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.registerUser = function (user) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3000/users/register', user, { headers: headers })
+        return this.http.post('users/register', user, { headers: headers })
             .map(function (res) { return res.json(); });
         // .toPromise()
         // .then(res => res.json());
@@ -1070,7 +1070,7 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.loginUser = function (user) {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3000/users/authenticate', user, { headers: headers })
+        return this.http.post('users/authenticate', user, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     AuthService.prototype.getProfile = function () {
@@ -1078,7 +1078,7 @@ var AuthService = /** @class */ (function () {
         this.getToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.get('http://localhost:3000/users/profile', { headers: headers })
+        return this.http.get('users/profile', { headers: headers })
             .map(function (res) { return res.json(); });
     };
     AuthService.prototype.storeData = function (token, user) {
@@ -1179,7 +1179,6 @@ var GetPricesService = /** @class */ (function () {
         headers.append('Content-Type', 'application/json');
         this.auth.getToken();
         headers.append('Authorization', this.auth.authToken);
-        console.log(this.auth.authToken);
         return this.http.post('stocks/buy', data, { headers: headers })
             .map(function (res) { return res.json(); });
     };
@@ -1188,7 +1187,6 @@ var GetPricesService = /** @class */ (function () {
         headers.append('Content-Type', 'application/json');
         this.auth.getToken();
         headers.append('Authorization', this.auth.authToken);
-        console.log(this.auth.authToken);
         return this.http.post('stocks/sell', data, { headers: headers })
             .map(function (res) { return res.json(); });
     };
