@@ -5,7 +5,7 @@ exports.getContent = function(url) {
     let stock = {};
     // return new pending promise
     return new Promise((resolve, reject) => {
-        // select http or https module, depending on reqested, in this app not needed because of url is constant. For future.
+        // select http or https module, depending on reqested. In this particular app not needed because of url is constant. For future use.
         const lib = url.startsWith('https') ? require('https') : require('http');
         const request = lib.get(url, (response) => {
             // handle http errors

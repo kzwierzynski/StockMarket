@@ -13,7 +13,7 @@
             <tr *ngFor="let unit of prices.Units; let i = index">
               <th scope="row">{{ prices.Codes[i] }}</th>
               <td>{{ prices.currPrices.items[i].price }}</td>
-              <td><button class="btn btn-info" (click)="buyCurrency(i)" id="i" [disabled]="!auth.user.wallet.PLN || prices.srvBlocked">Buy</button></td>
+              <td><button class="btn btn-info" (click)="buyCurrency(i)" id="i" [disabled]="(auth.user.wallet.PLN < prices.currPrices.items[i].price) || prices.srvBlocked">Buy</button></td>
             </tr>
           </tbody>
         </table> 
