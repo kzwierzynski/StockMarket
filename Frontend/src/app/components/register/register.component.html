@@ -16,7 +16,7 @@
             Name is required.
           </div>
           <div *ngIf="fname.errors.minlength || fname.errors.maxlength">
-            Name must be at between 2 and 40 characters long.
+            Name must be between 2 and 40 characters long.
           </div>
           <div *ngIf="fname.errors.pattern">
             Invalid name.
@@ -37,7 +37,7 @@
             Username is required.
           </div>
           <div *ngIf="fusername.errors.minlength || fusername.errors.maxlength">
-            Name must be at between 2 and 20 characters long.
+            Name must be between 2 and 20 characters long.
           </div>
           <div *ngIf="fusername.errors.pattern">
             Username must start and end with a letter. Only small letters allowed. In between can contain only a dot or a hyphen.
