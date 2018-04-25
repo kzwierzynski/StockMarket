@@ -635,10 +635,10 @@ var RegisterComponent = /** @class */ (function () {
         this.auth.registerUser(user)
             .subscribe(function (data) {
             // console.log(data);
-            _this.submitted = true;
             if (!data.success) {
                 _this.flashMessage.show(data.msg, { cssClass: 'alert-danger', timeout: 5000 });
                 _this.router.navigate(['/register']);
+                _this.submitted = true;
             }
             else {
                 _this.flashMessage.show(data.msg, { cssClass: 'alert-success', timeout: 3000 });
