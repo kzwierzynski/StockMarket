@@ -30,7 +30,7 @@ db.on('error', (err) => {
 
 const app = express();
 const router = express.Router();
-const port = 3000;
+const port = process.env.PORT || 8080;
 
 // initialize stocks wallet and get initial stock standings
 resources.initWallet()
@@ -101,5 +101,5 @@ app.get('*',function (req, res) {   //redirect if some different url from all sp
 
 // Start server
 app.listen(port, () => {
-    console.log("Server started on port 3000...")
+    console.log("Server started on port 8080...")
 })

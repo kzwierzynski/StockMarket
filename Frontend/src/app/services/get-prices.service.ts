@@ -55,7 +55,6 @@ export class GetPricesService{
     this.auth.getToken();
     headers.append('Authorization', this.auth.authToken);
     
-    console.log(this.auth.authToken);
     return this.http.post('stocks/buy', data, {headers: headers})
       .map(res => res.json());
   }
@@ -66,7 +65,6 @@ export class GetPricesService{
     this.auth.getToken();
     headers.append('Authorization', this.auth.authToken);
 
-    console.log(this.auth.authToken);
     return this.http.post('stocks/sell', data, {headers: headers})
       .map(res => res.json());
   }

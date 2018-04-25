@@ -1,4 +1,4 @@
 module.exports = {
-    database: 'mongodb://localhost:27017/stocks',
+    database: 'mongodb://pananimals:pananimals@ds111279.mlab.com:11279/stocks',
     secret : 'yoursecret'
 }
