@@ -56,11 +56,10 @@ export class RegisterComponent implements OnInit {
       }
     }
 
-    this.submitted = true;
-    
     this.auth.registerUser(user)
       .subscribe(data => {
         // console.log(data);
+        this.submitted = true;
         if (!data.success){
           this.flashMessage.show(data.msg, 
             { cssClass: 'alert-danger', timeout: 5000 });
