@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
 export class SellComponent implements OnInit {
 
   constructor(
-    private auth: AuthService,
-    private prices: GetPricesService,
+    public auth: AuthService,
+    public prices: GetPricesService,
     private sellBuy: SellBuyService,
     private router: Router
   ) { }

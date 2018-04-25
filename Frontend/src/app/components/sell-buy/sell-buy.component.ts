@@ -23,7 +23,7 @@ export class SellBuyComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private prices: GetPricesService,
-    private sellBuy: SellBuyService,
+    public sellBuy: SellBuyService,
     private flashMessage: FlashMessagesService,
     private router: Router
   ) { }

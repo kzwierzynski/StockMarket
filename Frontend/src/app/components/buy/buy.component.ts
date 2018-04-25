@@ -14,10 +14,10 @@ import {AuthService} from '../../services/auth.service';
 export class BuyComponent implements OnInit {
 
   constructor(
-    private prices: GetPricesService,
+    public prices: GetPricesService,
     private sellBuy: SellBuyService,
     private router: Router,
-    private auth: AuthService
+    public auth: AuthService
   ) { }
 
   ngOnInit() {

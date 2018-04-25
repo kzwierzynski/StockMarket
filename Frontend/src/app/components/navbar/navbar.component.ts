@@ -14,7 +14,7 @@ username: any;
 
   constructor(
     private flashMessage: FlashMessagesService,
-    private auth: AuthService,
+    public auth: AuthService,
     private router: Router
   ) { }
 

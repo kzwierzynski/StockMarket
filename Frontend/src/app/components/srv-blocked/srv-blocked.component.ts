@@ -9,7 +9,7 @@ import {GetPricesService} from '../../services/get-prices.service';
 export class SrvBlockedComponent implements OnInit {
 
   constructor(
-    private prices: GetPricesService,
+    public prices: GetPricesService,
   ) { }
 
   ngOnInit() {
