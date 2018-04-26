@@ -13,13 +13,13 @@
           </thead>
           <tbody  *ngIf="prices.currPrices">
             <tr *ngFor="let unit of prices.Units; let i = index">
-              <th scope="row" px-1>{{ prices.Codes[i] }}</th>
-              <td px-1>{{ prices.currPrices.items[i].price.toFixed(2) }}</td>
-              <td px-1>{{ auth.user.wallet[prices.Codes[i]] }}</td>
+              <th scope="row" class="px-1">{{ prices.Codes[i] }}</th>
+              <td class="px-1">{{ prices.currPrices.items[i].price.toFixed(2) }}</td>
+              <td class="px-1">{{ auth.user.wallet[prices.Codes[i]] }}</td>
               <!--  +num.toFixed(2) to drop extra 0s at the end, ("0 + foo"), 
                     result (string) changed again into number => it uses only as many digits as necessary-->
-              <td px-1>{{ +(auth.user.wallet[prices.Codes[i]] * prices.currPrices.items[i].price).toFixed(2) }}</td>
-              <td px-1><button class="btn btn-primary" (click)="sellCurrency(i)" id="i" [disabled]="!auth.user.wallet[prices.Codes[i]] || prices.srvBlocked">Sell</button></td>
+              <td class="px-1">{{ +(auth.user.wallet[prices.Codes[i]] * prices.currPrices.items[i].price).toFixed(2) }}</td>
+              <td class="px-1"><button class="btn btn-primary" (click)="sellCurrency(i)" id="i" [disabled]="!auth.user.wallet[prices.Codes[i]] || prices.srvBlocked">Sell</button></td>
             </tr>
           </tbody>
         </table>
