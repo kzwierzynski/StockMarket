@@ -31,11 +31,15 @@ app-footer {
     box-shadow: var(--shadow);
 }
 
+table td, table th{
+  vertical-align: middle !important;
+}
+
 @media(max-width:370px){
-  /* .col-lg-6#buy, .col-lg-6#sell{
+   body{
+     font-size: 80%;
+   }
+  /* .container{
     padding: 0;
   } */
-  .container{
-    padding: 0;
-  }
 }
