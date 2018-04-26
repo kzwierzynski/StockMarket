@@ -7,10 +7,10 @@
         <p class="mb-4">You currently have {{auth.user.wallet.PLN}} PLN</p>
       </div>
       <div class="mb-2 form-row">
-        <div class="col text-right">
-            <label for="buy" class="col-form-label">Buy: </label>
+        <div class="col-md-1 text-md-right">
+            <label for="buy" class="col-form-label"><p>Buy: </p></label>
         </div>
-        <div class="col">
+        <div class="col-7 col-md-3">
           <input type="number" class="form-control" [(ngModel)]="buy_units" name="buy_units"
           pattern="^\+?([1-9]\d*)$" maxValidator="{{auth.user.wallet.PLN / prices.currPrices.items[sellBuy.i].price}}"
           #fbuy="ngModel" required>
@@ -29,13 +29,13 @@
           </div>
         </div>
         
-        <div class="col">
-            <label class="col-form-label">{{prices.Codes[sellBuy.i]}} unit(s)</label> 
+        <div class="col-5 col-md-2">
+            <label class="col-form-label"><p>{{prices.Codes[sellBuy.i]}} unit(s)</p></label> 
         </div>
-        <div class="col">
-            <label class="col-form-label"> for {{ (prices.currPrices.items[sellBuy.i].price * buy_units).toFixed(2) }} PLN</label> 
+        <div class="col-md-3">
+            <label class="col-form-label"><p> for {{ (prices.currPrices.items[sellBuy.i].price * buy_units).toFixed(2) }} PLN</p></label> 
         </div>
-        <div class="col">
+        <div class="col-md-3">
             <button type="submit" class="btn btn-primary btn-lg" mwlConfirmationPopover
             [disabled]="prices.srvBlocked || !buyForm.form.valid"
             [popoverTitle]="popoverTitle"
@@ -59,10 +59,10 @@
           <p>You currently have {{auth.user.wallet[prices.Codes[sellBuy.i]]}} unit(s) of {{prices.Codes[sellBuy.i]}}</p>
         </div>
         <div class="mb-2 form-row">
-          <div class="col text-right">
+            <div class="col-md-1 text-md-right">
               <label for="sell" class="col-form-label">Sell: </label>
           </div>
-          <div class="col">
+          <div class="col-7 col-md-3">
             <input type="number" class="form-control" [(ngModel)]="sell_units" name="sell_units"
             maxValidator="{{auth.user.wallet[prices.Codes[sellBuy.i]]}}" pattern="^\+?([1-9]\d*)$"
             #fsell="ngModel" required>
@@ -82,16 +82,16 @@
           </div>
 
                     
-          <div class="col">
+          <div class="col-5 col-md-2">
               <label class="col-form-label">{{prices.Codes[sellBuy.i]}} unit(s)</label> 
           </div>
-          <div class="col">
+          <div class="col-md-3">
             <label class="col-form-label"> for {{ (prices.currPrices.items[sellBuy.i].price * sell_units).toFixed(2) }} PLN</label> 
         </div>
           <!-- <div class="col">
               <label class="col-form-label">for {{ (prices.currPrices.items[this.sellBuy.i].price * buyUnits).toFixed(2) }} PLN</label> 
           </div> -->
-          <div class="col">
+          <div class="col-md-3">
               <button class="btn btn-primary btn-lg" mwlConfirmationPopover 
               [disabled]="prices.srvBlocked || !sellForm.form.valid"
               [popoverTitle]="popoverTitle"
