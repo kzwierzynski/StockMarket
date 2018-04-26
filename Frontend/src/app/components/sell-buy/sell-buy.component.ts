@@ -14,7 +14,7 @@ export class SellBuyComponent implements OnInit {
 
   buy_units = 1;
   sell_units = 1;
-  delay = 10000;
+  delay: number = 10000;
   public popoverTitle: string = 'Confirmation';
   public popoverMessage: string  = "Are you sure you want to make the transaction?"
   // public popoverMessage: string;

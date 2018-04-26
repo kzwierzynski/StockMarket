@@ -1,0 +1,35 @@
+.follow{
+    list-style-type: none;
+    text-align: center;
+}
+
+.follow li {
+    display: inline;
+}
+
+.follow i{
+    font-size: 2rem;
+    padding: 1rem 4%;
+    color: rgba(255,255,255,0.5);
+}
+
+.follow i:hover{
+    color: #fff;
+}
+
+footer ul{
+    margin: 0;
+    padding: 0;
+}
+
+footer.socket{
+    max-height: 55px;
+    margin: 0;
+}
+
+footer.socket p{
+    margin: 0;
+    padding: 0.5rem 0;
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+}

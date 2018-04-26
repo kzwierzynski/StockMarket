@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto ">
             <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-            <a class="nav-link" [routerLink]="['/']"><i class="fas fa-home fa-2x"></i></a>
+            <a class="nav-link" [routerLink]="['/']"><i class="fa fa-home fa-2x"></i></a>
             </li>
         </ul>
         <ul class="navbar-nav right ">
@@ -22,10 +22,10 @@
                 <p class="nav-link mb-0">Logged in as: {{auth.user.username}}</p> 
             </li>
             <li *ngIf="auth.loggedIn()" class="nav-item" [routerLinkActive]="['active']">
-                <a class="nav-link" [routerLink]="['/profile']"><i class="fas fa-cog fa-2x"></i></a>
+                <a class="nav-link" [routerLink]="['/profile']"><i class="fa fa-cog fa-2x"></i></a>
             </li>
             <li *ngIf="auth.loggedIn()" class="nav-item">
-                <a class="nav-link" (click)="onClickLogout()" href="#"><i class="fas fa-power-off fa-2x"></i></a>
+                <a class="nav-link" (click)="onClickLogout()" href="#"><i class="fa fa-power-off fa-2x"></i></a>
             </li>
         </ul>
 
